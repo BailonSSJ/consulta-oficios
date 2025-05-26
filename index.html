@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Consulta de Folios - Protección Civil</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      background-color: white;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #800020;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #600018;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fff3cd;
+      border-left: 5px solid #856404;
+      display: none;
+    }
+    #result p.comentarios {
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      max-width: 100%;
+      text-align: justify;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Consulta de Folios</h2>
+    <p>Ingrese el número de folio (ejemplo: <strong>1234</strong>):</p>
+    <input type="text" id="folio" placeholder="Ejemplo: 1234" />
+    <button id="consultarBtn">CONSULTAR</button>
+    <div id="result"></div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
