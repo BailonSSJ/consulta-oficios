@@ -6,7 +6,7 @@ const folioInput = document.getElementById("folio");
 const resultDiv = document.getElementById("result");
 
 function limpiarTexto(texto) {
-  return texto ? texto.replace(/\s+/g, ' ').trim() : "";
+  return texto ? texto.replace(/\s+/g, ' ').trim() : "Sin comentarios.";
 }
 
 consultarBtn.addEventListener("click", async () => {
@@ -24,8 +24,8 @@ consultarBtn.addEventListener("click", async () => {
     if (snapshot.empty) {
       resultDiv.innerHTML = `<p>No se encontró información para el folio <strong>${folio}</strong>.</p>`;
       resultDiv.style.display = "block";
-      resultDiv.style.backgroundColor = "#f0f0f0"; // Fondo gris
-      resultDiv.style.color = "black"; // Texto negro por defecto
+      resultDiv.style.backgroundColor = "#f0f0f0";
+      resultDiv.style.color = "black";
       return;
     }
 
@@ -40,13 +40,13 @@ consultarBtn.addEventListener("click", async () => {
       });
     }
 
-    // Color de texto según estatus
+    // Color según estatus
     let colorEstatus = "black";
     if (data.estatus === "Aceptado") colorEstatus = "green";
-    else if (data.estatus === "Pendiente") colorEstatus = "orange"; // Amarillo/naranja para mejor legibilidad
+    else if (data.estatus === "Pendiente") colorEstatus = "orange";
     else if (data.estatus === "Rechazado") colorEstatus = "red";
 
-    // Mostrar motivo de rechazo solo si es Rechazado
+    // Motivo de rechazo si aplica
     let motivoRechazoHTML = "";
     if (data.estatus === "Rechazado") {
       motivoRechazoHTML = `<p><strong>Motivo de Rechazo:</strong> ${data.motivoRechazo || "No aplica"}</p>`;
@@ -57,16 +57,17 @@ consultarBtn.addEventListener("click", async () => {
       <p><strong>Fecha de Actualización:</strong> ${fechaActualizacion}</p>
       <p><strong>Estatus:</strong> <span style="color: ${colorEstatus}; font-weight: bold;">${data.estatus}</span></p>
       ${motivoRechazoHTML}
-      <p><strong>Asunto:</strong> ${data.asunto}</p>
+      <p><strong>Asunto:</strong> ${data.asunto || "No disponible"}</p>
       <p><strong>Comentarios:</strong></p>
-      <p class="comentarios-limpios">${limpiarTexto(data.comentarios)}</p>
+      <p class="result-comentarios">${limpiarTexto(data.comentarios)}</p>
     `;
 
     resultDiv.style.display = "block";
-    resultDiv.style.backgroundColor = "#f0f0f0"; // Fondo gris claro
+    resultDiv.style.backgroundColor = "#f0f0f0";
+    resultDiv.style.color = "black";
 
   } catch (error) {
     console.error("Error consultando la base de datos:", error);
-    alert("Ocurrió un error al consultar, intenta más tarde.");
+    alert("Ocurrió un error al consultar. Intenta más tarde.");
   }
 });
