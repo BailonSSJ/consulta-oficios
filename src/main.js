@@ -40,11 +40,20 @@ consultarBtn.addEventListener("click", async () => {
       });
     }
 
-    // Color según estatus
-    let colorEstatus = "black";
-    if (data.estatus === "Aceptado") colorEstatus = "green";
-    else if (data.estatus === "Pendiente") colorEstatus = "orange";
-    else if (data.estatus === "Rechazado") colorEstatus = "red";
+  // Color según estatus
+      let estatusMostrado = data.estatus;
+      let colorEstatus = "black";
+
+      if (estatusMostrado === "Aceptado") {
+        estatusMostrado = "Autorizado";
+        colorEstatus = "green";
+      } else if (estatusMostrado === "Pendiente") {
+        estatusMostrado = "En Proceso";
+        colorEstatus = "orange";
+      } else if (estatusMostrado === "Rechazado") {
+        colorEstatus = "red";
+      }
+
 
     // Motivo de rechazo si aplica
     let motivoRechazoHTML = "";
@@ -55,7 +64,7 @@ consultarBtn.addEventListener("click", async () => {
     resultDiv.innerHTML = `
       <p><strong>Folio:</strong> ${data.folio}</p>
       <p><strong>Fecha de Actualización:</strong> ${fechaActualizacion}</p>
-      <p><strong>Estatus:</strong> <span style="color: ${colorEstatus}; font-weight: bold;">${data.estatus}</span></p>
+      <p><strong>Estatus:</strong> <span style="color: ${colorEstatus}; font-weight: bold;">${estatusMostrado}</span></p>
       ${motivoRechazoHTML}
       <p><strong>Asunto:</strong> ${data.asunto || "No disponible"}</p>
       <p><strong>Comentarios:</strong></p>
